@@ -1,0 +1,73 @@
+{
+  "name": "bazi-ts-lib",
+  "version": "1.0.0",
+  "author": "Coaixy <coaixy@outlook.com>",
+  "license": "Apache-2.0",
+  "description": "八字排盘 TypeScript 库 - 支持早晚子时、大运流年、纳音、神煞、格局分析、用神判定",
+  "type": "module",
+  "packageManager": "pnpm@10.33.0",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/types/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.38.0",
+    "@typescript-eslint/parser": "^8.38.0",
+    "esbuild": "^0.25.8",
+    "eslint": "^9.31.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.3",
+    "jest": "^30.0.5",
+    "jest-util": "^30.0.5",
+    "prettier": "^3.6.2",
+    "ts-jest": "^29.4.0",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.21.0",
+    "typescript": "^5.8.3"
+  },
+  "scripts": {
+    "build": "node build.mjs && tsc --emitDeclarationOnly --outDir dist/types",
+    "dev": "tsc -w",
+    "start": "pnpm build && node --enable-source-maps dist/cjs/index.js",
+    "test": "jest --watchman=false",
+    "ts": "tsx src/index.ts",
+    "lint": "eslint src/**/*.ts",
+    "fix": "eslint src/**/*.ts --fix",
+    "prepare": "npm run build"
+  },
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/types/index.d.ts",
+        "default": "./dist/esm/index.js"
+      },
+      "require": {
+        "types": "./dist/types/index.d.ts",
+        "default": "./dist/cjs/index.js"
+      }
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/look-fate/bazi-ts-lib.git"
+  },
+  "keywords": [
+    "bazi",
+    "八字",
+    "四柱",
+    "命理",
+    "大运",
+    "流年",
+    "纳音",
+    "神煞",
+    "tyme4ts"
+  ],
+  "dependencies": {
+    "tyme4ts": "^1.4.5"
+  }
+}
