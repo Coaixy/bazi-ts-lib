@@ -1,6 +1,6 @@
 {
   "name": "bazi-ts-lib",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Coaixy <coaixy@outlook.com>",
   "license": "Apache-2.0",
   "description": "八字排盘 TypeScript 库 - 支持早晚子时、大运流年、纳音、神煞、格局分析、用神判定",

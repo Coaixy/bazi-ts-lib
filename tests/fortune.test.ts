@@ -2,7 +2,12 @@
  * 大运流年测试
  */
 
-import { getBaZi, getFortune, getAnnualFortuneByYear } from "../src/index";
+import {
+  getBaZi,
+  getFortune,
+  getAnnualFortuneByYear,
+  getAnnualFortuneRange,
+} from "../src/index";
 
 describe("大运流年", () => {
   const birthDate = new Date("1990-05-15 10:30");
@@ -54,6 +59,32 @@ describe("大运流年", () => {
     expect(annual?.year).toBe(2024);
     expect(annual?.sixtyCycle).toBeDefined();
     expect(annual?.age).toBeGreaterThan(0);
+  });
+
+  test("流年干支应与真实公历年份一致", () => {
+    const annual2024 = getAnnualFortuneByYear(bazi, birthDate, 2024);
+    const annual2025 = getAnnualFortuneByYear(bazi, birthDate, 2025);
+    const annual2026 = getAnnualFortuneByYear(bazi, birthDate, 2026);
+    const annual2027 = getAnnualFortuneByYear(bazi, birthDate, 2027);
+    const annual2028 = getAnnualFortuneByYear(bazi, birthDate, 2028);
+
+    expect(annual2024?.sixtyCycle).toBe("甲辰");
+    expect(annual2025?.sixtyCycle).toBe("乙巳");
+    expect(annual2026?.sixtyCycle).toBe("丙午");
+    expect(annual2027?.sixtyCycle).toBe("丁未");
+    expect(annual2028?.sixtyCycle).toBe("戊申");
+  });
+
+  test("流年区间应返回真实公历年份序列", () => {
+    const annuals = getAnnualFortuneRange(bazi, birthDate, 2024, 2028);
+
+    expect(annuals.map((item) => [item.year, item.sixtyCycle])).toEqual([
+      [2024, "甲辰"],
+      [2025, "乙巳"],
+      [2026, "丙午"],
+      [2027, "丁未"],
+      [2028, "戊申"],
+    ]);
   });
 
   test("起运算法切换", () => {

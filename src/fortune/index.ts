@@ -87,12 +87,14 @@ export function getAnnualFortuneRange(
   const mergedConfig = mergeConfig(config);
 
   return withConfig(mergedConfig, () => {
-    const childLimit = getTymeChildLimit(birthDate, baziResult.gender);
-    const dayPillar = baziResult.pillars.day.sixtyCycle;
-    const dayHeavenStem = SixtyCycle.fromName(dayPillar).getHeavenStem();
-    const birthYear = birthDate.getFullYear();
-
-    return getAnnualFortuneList(childLimit, dayHeavenStem, startYear, endYear, birthYear);
+    const result: AnnualFortuneInfo[] = [];
+    for (let year = startYear; year <= endYear; year++) {
+      const annual = getAnnualFortuneByYear(baziResult, birthDate, year, mergedConfig);
+      if (annual) {
+        result.push(annual);
+      }
+    }
+    return result;
   });
 }
 

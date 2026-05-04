@@ -2,7 +2,7 @@
  * 流年计算模块
  */
 
-import { ChildLimit, Fortune, HeavenStem, EarthBranch } from "tyme4ts";
+import { ChildLimit, HeavenStem, EarthBranch, SixtyCycle } from "tyme4ts";
 import { AnnualFortuneInfo } from "./type";
 import { TenStarType, TerrainType } from "../core/type";
 
@@ -27,13 +27,9 @@ export function getAnnualFortune(
     return null;
   }
 
-  // 计算流年索引（从出生年开始）
-  const startFortune = childLimit.getStartDecadeFortune().getStartFortune();
-
-  // 从起运开始计算第 n 个流年
-  // 注意：流年从出生年开始，需要计算偏移
-  const fortune = startFortune.next(age - 1) as Fortune;
-  const sixtyCycle = fortune.getSixtyCycle();
+  const sixtyCycle = SixtyCycle.fromIndex(
+    ((targetYear - 1984) % 60 + 60) % 60
+  );
   const stem = sixtyCycle.getHeavenStem();
   const branch = sixtyCycle.getEarthBranch();
 
